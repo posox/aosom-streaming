@@ -49,12 +49,13 @@ services:
 # Telegraf - Prom
 # -------------------------------------------------------------------------
   telegraf-prom:
-    image: apstra/telegraf:latest
+    image: apstra/telegraf:1.27-aos-4.2.0
     command: telegraf -debug
     env_file:
       - variables.env
     volumes:
       - ./config/telegraf-prom.toml:/etc/telegraf/telegraf.conf
+      - ./config/telegraf-prom-plugin.toml:/etc/telegraf/telegraf-aos-plugin.conf
       - /etc/localtime:/etc/localtime
     ports:
         - '6666:6666'
@@ -63,12 +64,13 @@ services:
 # Telegraf - Influx
 # -------------------------------------------------------------------------
   telegraf-influx:
-    image: apstra/telegraf:latest
+    image: apstra/telegraf:1.27-aos-4.2.0
     command: telegraf -debug
     env_file:
       - variables.env
     volumes:
       - ./config/telegraf-influx.toml:/etc/telegraf/telegraf.conf
+      - ./config/telegraf-influx-plugin.toml:/etc/telegraf/telegraf-aos-plugin.conf
       - /etc/localtime:/etc/localtime
     ports:
         - '4444:4444'

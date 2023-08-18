@@ -31,12 +31,13 @@ services:
 # Telegraf - Elasticsearch
 # -------------------------------------------------------------------------
   telegraf-elasticsearch:
-    image: apstra/telegraf:latest
+    image: apstra/telegraf:1.27-aos-4.2.0
     command: telegraf -debug
     env_file:
       - variables.env
     volumes:
       - ./config/telegraf-es.toml:/etc/telegraf/telegraf.conf
+      - ./config/telegraf-es-plugin.toml:/etc/telegraf/telegraf-aos-plugin.conf
       - /etc/localtime:/etc/localtime
     depends_on:
       - elasticsearch
